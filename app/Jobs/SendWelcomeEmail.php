@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Contracts\SendsWelcomeMail;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -19,8 +20,8 @@ class SendWelcomeEmail implements ShouldQueue
     {
     }
 
-    public function handle(Mailer $mail): void
+    public function handle(SendsWelcomeMail $sendWelcomeMail): void
     {
-        $mail->to($this->user)->send(new WelcomeMail($this->user));
+        $sendWelcomeMail($this->user);
     }
 }
