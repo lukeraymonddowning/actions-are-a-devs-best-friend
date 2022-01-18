@@ -12,18 +12,3 @@
 */
 
 uses(Tests\TestCase::class)->in('Feature');
-
-/**
- * @param class-string $action
- */
-function shouldCallAction(string $action, mixed $returnValue = null)
-{
-    test()->mock($action, fn($mock) => $mock
-        ->shouldReceive('__invoke')
-        ->atLeast()
-        ->once()
-        ->andReturn(value($returnValue))
-    );
-
-    return test();
-}
