@@ -60,7 +60,7 @@
             @foreach($users as $user)
                 <div class="flex items-center">
                     <div class="h-20 w-20 mr-4 relative">
-                        <span class="absolute inset-4 bg-blue-500 blur-lg"></span>
+                        <span class="absolute inset-4 @if($user->is(auth()->user())) bg-green-500 @else bg-blue-500 @endif blur-lg"></span>
                         <img src="/heads/{{ $user->picture }}" alt="A head" class="h-full relative">
                     </div>
                     <div class="flex-1 flex flex-col">

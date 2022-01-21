@@ -17,7 +17,7 @@ class RegisterUserCommand extends Command
 {
     use RendersAsciiParrot;
 
-    protected $signature = 'site:user:register {email?} {name?} {password?}';
+    protected $signature = 'register {email?} {name?} {password?}';
 
     protected $description = 'Register a new user.';
 
