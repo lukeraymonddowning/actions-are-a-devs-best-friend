@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 /**
@@ -14,14 +15,15 @@ class RegisterController extends Controller
 {
     public function __invoke(Request $request, StatefulGuard $auth)
     {
-        $user = User::query()->create($this->data($request));
+        $data = $this->validData($request);
+        $user = User::query()->create(array_merge($data, ['password' => Hash::make($data['password'])]));
 
         $auth->login($user);
 
         return redirect(route('home'));
     }
 
-    private function data(Request $request): array
+    private function validData(Request $request): array
     {
         return $request->validate([
             'email' => ['required', 'email', 'unique:users'],
