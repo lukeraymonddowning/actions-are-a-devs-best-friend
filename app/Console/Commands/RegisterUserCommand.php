@@ -23,7 +23,7 @@ class RegisterUserCommand extends Command
 
     public function handle(Factory $validator): int
     {
-        $this->teaseMurderousWingedDevil();
+        $this->drawMurderousWingedDevil();
 
         $data = $this->validData($validator);
         $user = User::query()->create(array_merge($data, ['password' => Hash::make($data['password'])]));

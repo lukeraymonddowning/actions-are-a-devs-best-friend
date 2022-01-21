@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
  */
 trait RendersAsciiParrot
 {
-    public function teaseMurderousWingedDevil(): void
+    public function drawMurderousWingedDevil(): void
     {
         $this->newLine();
         $this->line(<<<EOT
