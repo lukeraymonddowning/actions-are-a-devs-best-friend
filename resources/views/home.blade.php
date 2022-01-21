@@ -5,6 +5,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="font-mono min-h-screen antialiased bg-slate-900">
+<div class="mt-4 flex flex-col items-center">
+    <img src="/parrot.png" alt="A Parrot" class="h-20">
+    <h1 class="text-red-500 text-5xl font-bold italic">ParrotCon</h1>
+    <span class="mt-1 text-slate-200">Online</span>
+</div>
 <div class="flex h-full p-6 space-x-6 justify-around">
     <form action="{{ route('users.register') }}" method="POST" class="flex-1 mt-5">
         @csrf
@@ -55,7 +60,7 @@
     </form>
     <div class="flex-1 flex flex-col">
         <h2 class="text-slate-200 text-3xl mb-3">Users</h2>
-        <div class="flex-1 rounded-lg border-2 border-slate-200 p-4">
+        <div class="flex-1 p-4">
             @foreach($users as $user)
                 <div class="flex items-center">
                     <img src="/heads/{{ $user->picture }}" alt="A head" class="h-20 mr-4">
