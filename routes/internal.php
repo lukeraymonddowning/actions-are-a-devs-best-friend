@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\WelcomeMail;
 use App\Models\User;
 
 Route::get('/', fn () => view('home', [
@@ -21,3 +22,5 @@ Route::get('/', fn () => view('home', [
         'steve@jump24.com',
     ],
 ]))->name('home');
+
+Route::get('/mail/{user:email}', fn (User $user) => new WelcomeMail($user));
