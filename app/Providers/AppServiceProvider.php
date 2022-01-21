@@ -21,10 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        if ($this->app->runningUnitTests()) {
-            Password::defaults(function () {
-                return Password::min(8)->mixedCase()->numbers();
-            });
-        }
+        Password::defaults(function () {
+            return $this->app->runningUnitTests()
+                ? Password::min(8)->mixedCase()->numbers()
+                : Password::min(4);
+        });
     }
 }
