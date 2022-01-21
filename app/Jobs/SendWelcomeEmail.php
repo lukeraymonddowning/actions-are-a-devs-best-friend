@@ -2,11 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Contracts\SendsWelcomeMail;
-use App\Mail\WelcomeMail;
+use App\Contracts\Actions\SendsWelcomeMail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;

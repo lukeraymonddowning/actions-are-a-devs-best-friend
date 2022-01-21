@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\SendWelcomeMail;
-use App\Contracts\SendsWelcomeMail;
+use App\Contracts\Actions\SendsWelcomeMail;
 use Illuminate\Support\ServiceProvider;
 
 class ActionServiceProvider extends ServiceProvider

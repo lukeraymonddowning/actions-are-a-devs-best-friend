@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Contracts\SendsWelcomeMail;
+use App\Contracts\Actions\SendsWelcomeMail;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Contracts\Mail\Mailer;

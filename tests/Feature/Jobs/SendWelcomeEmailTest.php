@@ -1,6 +1,5 @@
 <?php
 
-use App\Contracts\SendsWelcomeMail;
 use App\Jobs\SendWelcomeEmail;
 use App\Mail\WelcomeMail;
 use App\Models\User;
