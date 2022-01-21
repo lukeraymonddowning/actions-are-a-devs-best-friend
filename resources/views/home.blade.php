@@ -49,7 +49,7 @@
             @enderror
         </div>
         <button type="submit"
-                class="rounded-full h-14 w-40 bg-blue-700 text-slate-200 border border-blue-600 shadow-lg shadow-blue-800">
+                class="rounded-full h-14 w-40 bg-blue-700 hover:bg-blue-600 text-slate-200 border border-blue-600 shadow-lg shadow-blue-800 transition">
             Register
         </button>
     </form>
