@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
 it('can register a user', function () {
-    $command = $this->artisan('site:user:register', [
+    $command = $this->artisan('register', [
         'email' => 'foo@bar.com',
         'name' => 'John Doe',
         'password' => 'SuperSecr3tP4ssword!',
@@ -18,7 +18,7 @@ it('can register a user', function () {
 it('requires valid data', function (array $data, array $errors) {
     User::factory()->create(['email' => 'foo@bar.com']);
 
-    $command = $this->artisan('site:user:register', array_merge([
+    $command = $this->artisan('register', array_merge([
         'email' => $this->faker->email,
         'name' => $this->faker->name,
         'password' => $this->faker->password,
