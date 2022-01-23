@@ -6,6 +6,9 @@
 </head>
 <body class="font-mono min-h-screen antialiased bg-slate-900">
 <x-logo/>
+<div id="pooping-parrot-container" class="absolute top-24 h-28 inset-x-0">
+    <img src="/parrot.gif" id="pooping-parrot" class="absolute h-full -scale-x-100"/>
+</div>
 <div class="flex h-full p-6 space-x-6 justify-around">
     <form action="{{ route('users.register') }}" method="POST" class="flex-1 mt-5">
         @csrf
@@ -61,7 +64,7 @@
                 <div class="flex items-center">
                     <div class="h-20 w-20 mr-4 relative">
                         <span class="absolute inset-4 @if($user->is(auth()->user())) bg-green-500 @else bg-blue-500 @endif blur-lg"></span>
-                        <img src="/heads/{{ $user->picture }}" alt="A head" class="h-full relative">
+                        <img src="/heads/{{ $user->picture }}" alt="A head" class="h-full relative transition-transform ease-in duration-1000" @if($loop->first) id="first-head" style="opacity: 0" @endif>
                     </div>
                     <div class="flex-1 flex flex-col">
                         <span class="text-yellow-500 text-2xl font-bubble">{{ $user->name }}</span>
@@ -73,5 +76,36 @@
         </div>
     </div>
 </div>
+<script>
+    const parrotContainer = document.getElementById('pooping-parrot-container');
+    const parrot = document.getElementById('pooping-parrot');
+    const head = document.getElementById('first-head');
+    const parrotWidth = parrot.getBoundingClientRect().width;
+    let hasPooped = false;
+
+    head.style.transform = `translateY(-130px) scale(0.1)`;
+
+    let parrotPosition = parrotContainer.getBoundingClientRect().right - parrotWidth;
+    parrot.style.left = parrotPosition + 'px';
+
+    const timer = setInterval(() => {
+        parrotPosition -= 2;
+        parrot.style.left = parrotPosition + 'px';
+
+        if (parrotPosition < -150) {
+            parrotContainer.remove();
+        }
+
+        if (hasPooped) {
+            return;
+        }
+
+        if (parrotPosition <= head.getBoundingClientRect().left - 50) {
+            head.style.transform = `translateY(0) scale(1)`;
+            head.style.opacity = '1';
+            hasPooped = true;
+        }
+    }, 10);
+</script>
 </body>
 </html>
