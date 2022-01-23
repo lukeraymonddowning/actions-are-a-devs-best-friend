@@ -20,7 +20,7 @@ class RegisterController extends Controller
 
         $auth->login($user);
 
-        return redirect(route('home'));
+        return redirect(route('home'))->with('poop', true);
     }
 
     private function validData(Request $request): array
