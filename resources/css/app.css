@@ -3,3 +3,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes swoop {
+    from {
+        transform: translateY(-100px) translateX(5%);
+    }
+    45% {
+        transform: translateY(0) translateX(-44%);
+    }
+    to {
+        transform: translateY(-200px) translateX(-100%);
+    }
+}
+
+.swoop {
+    animation: swoop 12s ease-in-out;
+}

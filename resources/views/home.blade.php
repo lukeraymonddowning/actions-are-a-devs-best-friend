@@ -7,8 +7,8 @@
 <body class="font-mono min-h-screen antialiased bg-slate-900">
 <x-logo/>
 @if(session()->has('poop'))
-    <div id="pooping-parrot-container" class="absolute top-24 h-28 inset-x-0">
-        <img src="/parrot.gif" id="pooping-parrot" class="absolute h-full -scale-x-100"/>
+    <div id="pooping-parrot-container" class="absolute top-24 h-28 inset-x-0 transition-transform z-50">
+        <img src="/parrot.gif" id="pooping-parrot" class="absolute h-full -scale-x-100 right-0"/>
     </div>
 @endif
 <div class="flex h-full p-6 space-x-6 justify-around">
@@ -69,7 +69,7 @@
                             class="absolute inset-4 @if($user->is(auth()->user())) bg-green-500 @else bg-blue-500 @endif blur-lg"></span>
                         <img src="/heads/{{ $user->picture }}" alt="A head"
                              class="h-full relative transition-opacity"
-                             @if(session()->has('poop') && $loop->first) id="first-head" style="opacity: 0" @endif>
+                             @if(session()->has('poop') && $loop->first) id="first-head" style="opacity: 0;" @endif>
                         @if(session()->has('poop') && $loop->first)
                             <img id="poop" src="/poop.png"
                                  class="absolute top-0 inset-0 opacity-0 transition-transform ease-in duration-1000">
@@ -88,30 +88,24 @@
 @if(session()->has('poop'))
     <script>
         const parrotContainer = document.getElementById('pooping-parrot-container');
-        const parrot = document.getElementById('pooping-parrot');
         const poop = document.getElementById('poop');
         const head = document.getElementById('first-head');
-        const parrotWidth = parrot.getBoundingClientRect().width;
+        const parrotWidth = document.getElementById('pooping-parrot').getBoundingClientRect().width;
         let hasPooped = false;
 
         poop.style.transform = `translateY(-130px) scale(0.1)`;
 
-        let parrotPosition = parrotContainer.getBoundingClientRect().right - parrotWidth;
-        parrot.style.left = parrotPosition + 'px';
+        parrotContainer.addEventListener('animationend', () => parrotContainer.remove());
+        parrotContainer.classList.add('swoop');
 
-        const timer = setInterval(() => {
-            parrotPosition -= 2;
-            parrot.style.left = parrotPosition + 'px';
-
-            if (parrotPosition < -150) {
-                parrotContainer.remove();
-            }
+        setInterval(() => {
+            let parrotPosition = parrotContainer.getBoundingClientRect().right - parrotWidth;
 
             if (hasPooped) {
                 return;
             }
 
-            if (parrotPosition > head.getBoundingClientRect().left - 50) {
+            if (parrotPosition > head.getBoundingClientRect().left) {
                 return;
             }
 
@@ -122,8 +116,8 @@
             setTimeout(() => {
                 poop.style.transitionDuration = '500ms';
                 head.style.transitionDuration = '500ms';
-                poop.style.transitionProperty = 'opacity'
-                head.style.transitionProperty = 'opacity'
+                poop.style.transitionProperty = 'opacity';
+                head.style.transitionProperty = 'opacity';
                 poop.style.opacity = '0';
                 head.style.opacity = '1';
             }, 1100);
