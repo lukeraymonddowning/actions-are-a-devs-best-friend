@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function __invoke(Request $request, StatefulGuard $auth)
     {
         $data = $this->validData($request);
-        $user = User::query()->create(array_merge($data, [
+        $user = User::create(array_merge($data, [
             'password' => Hash::make($data['password'])
         ]));
 
