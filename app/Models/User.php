@@ -60,8 +60,9 @@ class User extends Authenticatable
             'password' => Password::required(),
         ]);
 
-        return self::create(array_merge($data, [
+        return self::create([
+            ...$data,
             'password' => Hash::make($data['password'])
-        ]));
+        ]);
     }
 }
