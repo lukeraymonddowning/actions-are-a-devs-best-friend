@@ -25,10 +25,10 @@ class RegisterUserCommand extends Command
     {
         $this->drawMurderousWingedDevil();
 
-        $data = $this->validData($validator);
-        $user = User::create(array_merge($data, [
+        $user = User::create([
+            ...$this->validData($validator),
             'password' => Hash::make($data['password'])
-        ]));
+        ]);
 
         $this->line("User [{$user->email}] has been registered.");
 
