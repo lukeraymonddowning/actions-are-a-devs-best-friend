@@ -21,27 +21,15 @@ class RegisterUserCommand extends Command
 
     protected $description = 'Register a new user.';
 
-    public function handle(Factory $validator): int
+    public function handle(): int
     {
         $this->drawMurderousWingedDevil();
 
-        $data = $this->validData($validator);
-        $user = User::query()->create(array_merge($data, [
-            'password' => Hash::make($data['password'])
-        ]));
+        $user = User::register($this->data());
 
         $this->line("User [{$user->email}] has been registered.");
 
         return Command::SUCCESS;
-    }
-
-    private function validData(Factory $validator): array
-    {
-        return $validator->make($this->data(), [
-            'email' => ['required', 'email', 'unique:users'],
-            'name' => ['required', 'string', 'max:255'],
-            'password' => Password::required(),
-        ])->validate();
     }
 
     private function data(): array

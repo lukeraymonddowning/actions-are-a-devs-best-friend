@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -47,5 +50,18 @@ class User extends Authenticatable
     public function picture(): Attribute
     {
         return new Attribute(fn () => Str::kebab($this->name) . '.png');
+    }
+
+    public static function register(array $data): self
+    {
+        $data = Validator::validate($data, [
+            'email' => ['required', 'email', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],
+            'password' => Password::required(),
+        ]);
+
+        return self::create(array_merge($data, [
+            'password' => Hash::make($data['password'])
+        ]));
     }
 }
