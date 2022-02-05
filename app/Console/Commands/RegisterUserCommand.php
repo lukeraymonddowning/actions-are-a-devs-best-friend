@@ -26,7 +26,7 @@ class RegisterUserCommand extends Command
         $this->drawMurderousWingedDevil();
 
         $data = $this->validData($validator);
-        $user = User::query()->create(array_merge($data, [
+        $user = User::create(array_merge($data, [
             'password' => Hash::make($data['password'])
         ]));
 
