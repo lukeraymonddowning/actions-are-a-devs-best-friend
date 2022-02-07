@@ -11,4 +11,17 @@
 |
 */
 
+use Illuminate\Validation\ValidationException;
+
 uses(Tests\TestCase::class)->in('Feature');
+
+expect()->extend('toBeInvalid', function ($errors) {
+    try {
+        $this->value->__invoke();
+        test()->fail('No validation exception was thrown!');
+    } catch (ValidationException $exception) {
+        foreach ($errors as $key => $error) {
+            expect(json_encode($exception->errors()[$key]))->toContain($error);
+        }
+    }
+});

@@ -26,13 +26,7 @@ it('requires valid data', function (array $data, array $errors) {
 
     $command->assertFailed();
 
-    try {
-        $command->run();
-    } catch (ValidationException $exception) {
-        foreach ($errors as $key => $error) {
-            expect(json_encode($exception->errors()[$key]))->toContain($error);
-        }
-    }
+    expect(fn () => $command->run())->toBeInvalid($errors);
 })->with([
     'email not an email' => [['email' => 'foo'], ['email' => 'valid']],
     'email already taken' => [['email' => 'foo@bar.com'], ['email' => 'taken']],
