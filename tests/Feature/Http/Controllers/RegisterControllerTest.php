@@ -15,7 +15,7 @@ it('can register a user', function () {
     expect(User::query()->exists())->toBeTrue();
 });
 
-it('requires valid data', function (array $data, array $errors) {
+it('fails validation', function (array $data, array $errors) {
     User::factory()->create(['email' => 'foo@bar.com']);
 
     $response = $this->post(route('users.register'), $data);

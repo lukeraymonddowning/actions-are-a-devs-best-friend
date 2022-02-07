@@ -15,20 +15,24 @@ it('can register a user', function () {
     expect(User::query()->exists())->toBeTrue();
 });
 
-it('requires valid data', function (array $data, array $errors) {
+it('fails validation', function (array $data, array $errors) {
     User::factory()->create(['email' => 'foo@bar.com']);
 
-    $command = $this->artisan('register', array_merge([
+    $command = $this->artisan('register', [
         'email' => $this->faker->email,
         'name' => $this->faker->name,
         'password' => $this->faker->password,
-    ], $data));
+        ...$data
+    ]);
 
     $command->assertFailed();
 
     expect(fn () => $command->run())->toBeInvalid($errors);
 })->with([
-    'email not an email' => [['email' => 'foo'], ['email' => 'valid']],
+    'email not an email' => [  // A description of our set of data.
+        ['email' => 'foo'],   // The data we want to run our action with.
+        ['email' => 'valid']  // The validation errors we expect to see.
+    ],
     'email already taken' => [['email' => 'foo@bar.com'], ['email' => 'taken']],
 
     'name not a string' => [['name' => 123], ['name' => 'string']],
