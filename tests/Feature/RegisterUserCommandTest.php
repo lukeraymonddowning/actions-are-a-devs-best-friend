@@ -15,7 +15,7 @@ it('can register a user', function () {
     expect(User::query()->exists())->toBeTrue();
 });
 
-it('fails validation', function (array $data, array $errors) {
+it('is invalid', function (array $data, array $errors) {
     User::factory()->create(['email' => 'foo@bar.com']);
 
     $command = $this->artisan('register', [
@@ -33,12 +33,12 @@ it('fails validation', function (array $data, array $errors) {
         ['email' => 'foo'],   // The data we want to run our action with.
         ['email' => 'valid']  // The validation errors we expect to see.
     ],
-    'email already taken' => [['email' => 'foo@bar.com'], ['email' => 'taken']],
+    'email taken' => [['email' => 'foo@bar.com'], ['email' => 'taken']],
 
-    'name not a string' => [['name' => 123], ['name' => 'string']],
-    'name longer than 255 characters' => [['name' => str_repeat('a', 256)], ['name' => 'must not be greater than 255 characters']],
+    'name ! string' => [['name' => 123], ['name' => 'string']],
+    'name > 255 characters' => [['name' => str_repeat('a', 256)], ['name' => 'must not be greater than 255 characters']],
 
-    'password less than 8 characters' => [['password' => '1234567'], ['password' => 'must be at least 8 characters']],
-    'password not mixed case' => [['password' => '12345678'], ['password' => 'must contain at least one uppercase and one lowercase letter']],
+    'password < 8 characters' => [['password' => '1234567'], ['password' => 'must be at least 8 characters']],
+    'password ! mixed case' => [['password' => '12345678'], ['password' => 'must contain at least one uppercase and one lowercase letter']],
     'password no numbers' => [['password' => 'abcdefgh'], ['password' => 'must contain at least one number']],
 ]);
