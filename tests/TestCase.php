@@ -14,11 +14,11 @@ abstract class TestCase extends BaseTestCase
 
 //    public function shouldHaveCalledAction(string $action)
 //    {
-//        $instance = $this->app->make($action);
+//        $original = $this->app->make($action);
 //
 //        $this->mock($action)
 //            ->shouldReceive('__invoke')
 //            ->atLeast()->once()
-//            ->andReturnUsing(fn (...$args) => $instance(...$args));
+//            ->andReturnUsing(fn(...$args) => $original(...$args));
 //    }
 }
