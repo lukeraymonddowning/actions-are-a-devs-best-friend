@@ -11,4 +11,15 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use LazilyRefreshDatabase;
     use WithFaker;
+
+//    public function shouldHaveCalledAction(string $action)
+//    {
+//        $mock = $this->getMockBuilder($this->app->get($action)::class)
+//            ->enableProxyingToOriginalMethods()
+//            ->getMock();
+//
+//        $mock->expects($this->atLeastOnce())->method('__invoke');
+//
+//        $this->instance($action, $mock);
+//    }
 }
