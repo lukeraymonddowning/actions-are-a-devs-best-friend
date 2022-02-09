@@ -12,13 +12,13 @@ abstract class TestCase extends BaseTestCase
     use LazilyRefreshDatabase;
     use WithFaker;
 
-//    public function shouldHaveCalledAction(string $action)
-//    {
-//        $original = $this->app->make($action);
-//
-//        $this->mock($action)
-//            ->shouldReceive('__invoke')
-//            ->atLeast()->once()
-//            ->andReturnUsing(fn(...$args) => $original(...$args));
-//    }
+    public function shouldHaveCalledAction(string $action)
+    {
+        $original = $this->app->make($action);
+
+        $this->mock($action)
+            ->shouldReceive('__invoke')
+            ->atLeast()->once()
+            ->andReturnUsing(fn(...$args) => $original(...$args));
+    }
 }

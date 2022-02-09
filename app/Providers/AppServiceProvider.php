@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Actions\RegisterUser;
+use App\Contracts\Actions\RegistersUser;
 use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Database\Eloquent\Model;

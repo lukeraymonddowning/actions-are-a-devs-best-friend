@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\OnboardUser;
+use App\Actions\RegisterUser;
+use App\Contracts\Actions\OnboardsUser;
+use App\Contracts\Actions\RegistersUser;
+use App\Contracts\Actions\SendsWelcomeMail;
 use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
@@ -13,26 +18,13 @@ use Illuminate\Validation\Rules\Password;
  */
 class RegisterController extends Controller
 {
-    public function __invoke(Request $request, StatefulGuard $auth)
+    public function __invoke(Request $request, OnboardsUser $onboardUser, StatefulGuard $auth)
     {
-        $data = $this->validData($request);
-        $user = User::create([
-            ...$data,
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = $onboardUser($request->all());
 
         $auth->login($user);
 
         return redirect(route('home'))->with('poop', true);
-    }
-
-    private function validData(Request $request): array
-    {
-        return $request->validate([
-            'email' => ['required', 'email', 'unique:users'],
-            'name' => ['required', 'string', 'max:255'],
-            'password' => Password::required(),
-        ]);
     }
 
 }
