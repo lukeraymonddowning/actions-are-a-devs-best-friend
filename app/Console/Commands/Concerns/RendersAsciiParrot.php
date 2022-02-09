@@ -13,8 +13,8 @@ trait RendersAsciiParrot
     {
         $this->newLine();
         $this->line(<<<EOT
-        <fg=red>            .------.
-        <fg=red>           /  ~ ~   \.Thanks,      Steve
+        <fg=red>            .-.. .-
+        <fg=red>           .-. .- -.-. --- -.       ----
         <fg=red>         ,'  ~ ~ ~  /  <fg=magenta>(@)   <fg=red>\   ,'      \
         <fg=red>       ,'          <fg=yellow>/<fg=red>`.    ~ ~ \ /         \
         <fg=red>     ,'           <fg=yellow>| ,'<fg=red>\  ~ ~ ~ X     \  \  \
