@@ -29,7 +29,7 @@ it('is invalid', function (array $data, array $errors) {
 
     expect(fn () => $command->run())->toBeInvalid($errors);
 })->with([
-    'email not an email' => [  // A description of our set of data.
+    'email ! an email' => [  // A description of our set of data.
         ['email' => 'foo'],   // The data we want to run our action with.
         ['email' => 'valid']  // The validation errors we expect to see.
     ],
