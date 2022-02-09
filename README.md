@@ -8,3 +8,10 @@ There are 4 branches:
 2) [the_end_result](https://github.com/lukeraymonddowning/actions-are-a-devs-best-friend/tree/the_end_result) - The codebase after refactoring to actions
 3) [with_artisan](https://github.com/lukeraymonddowning/actions-are-a-devs-best-friend/tree/with_artisan) - The terrible idea of refactoring to Artisan commands as an abstraction
 4) [with_model](https://github.com/lukeraymonddowning/actions-are-a-devs-best-friend/tree/with_model) - The slightly better (but still questionable) idea of putting our abstracted logic in the model
+
+Also, for those wondering, here is my setup:
+
+- PHPStorm with all toolbars disabled. Theme is Material Palenight.
+- Jetbrains Mono Font.
+- Warp is my terminal of choice.
+- I use Apple Keynote for slides.
